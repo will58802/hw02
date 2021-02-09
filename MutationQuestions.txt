@@ -1,0 +1,86 @@
+﻿Task: What changes, if any, did you observe and why did they occur (or not occur)? Did changing one object affect the others? Why or why not? Put your answer to these questions, as well as the rest of the written questions labeled “Task” on this HW, in a plain text file called MutationQuestions.txt and upload it to Gradescope along with the rest of your submission.
+
+
+I noticed that the setTier() method changed the tier in both lists whereas when I called updateTier() on a certain list, it only mutated the tier value in the Ticket in the specific list. 
+
+
+
+
+
+
+
+
+
+
+
+
+Task: Why does your implementation of buyTicket and awardTicket guarantee that the scenario outcome is correct with respect to the levels seen at the end? Put your response into MutationQuestions.txt.
+
+
+Not 100% what this question is asking, but buyTicket() and awardTicket() are very similar in that they both add a ticket to the fullList, but awardTicket() adds a ticket to the compList as well. 
+
+
+
+
+
+
+
+
+
+
+
+
+Task: Write tests that use removeTier to remove all Platinum Tickets in the regular sales list. If we call removeTier on the regular ticket list, what changes will happen in the complimentary ticket list? What in your code causes that behavior? Write a sentence or two explaining this behavior and put your response into MutationQuestions.txt.
+
+
+Calling the removeTier() method on the regular ticket list would not affect the complimentary ticket list because removeTier() essentially creates a new list out of the one it is called on. Therefore, this new list without a certain tier will only act on the Tickets in the regular ticket list.
+
+
+
+
+
+
+Task: Write responses to the following questions in MutationQuestions.txt
+There’s been a system crash and ticket data has been corrupted. We know the data was stable 3 hours ago, so we want to restore the data that existed at that time. What would you have to do in your code to enable this rollback? Which of the following approaches would work given the way your code is currently written?
+* Keep a list of the previous versions. Once an hour, we call a function like storeSales(saleslist) that puts the current sales list in some other data structure so we can retrieve it later if needed
+* Keep a list of shallow copies of saleslist
+* Keep a list of deep copies of saleslist
+No changes to your code are required for this question. We’re only looking for a written response.
+I would keep a list of deep copies because the corruption of the ticket data would likely affect a shallow copy of the salelist. Furthermore, calling a function like storeSales(saleslist) every hour would require us to build a new data structure to store the sales and would likely have a higher space complexity. The way our code is written allows for us to make deep copies easily.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Reflection
+Task: Write responses to the following questions in MutationQuestions.txt
+* You’ve now implemented a functional version of lists in both Java and one of the functional programming languages that you encountered in an earlier intro course. How does Java’s object mutation affect this homework’s implementation, as opposed to the implementations of lists that you have done in your earlier intro course?
+The Java implementations allow for changing of the values in the structures. Also, in Java we set the framework in multiple classes before instantiating a list, setting a blueprint for being able to manipulate the values whereas in other implementations of lists, our lists were set and stone and could not be changed with methods. Lastly, the concept of instances of objects is new as they did not exist in functional programming languages. 
+* What problems might this list implementation create for users used to list implementations written in programming languages that do not support mutation, and what principles did you learn in this homework that help you mitigate those problems?
+This might I learned that instances of objects can have different values in different lists or structures that contain them and that there are methods that can change the values globally and methods to change them within certain lists.  
+* In this segment of the course, we are talking about lists that can be changed in two ways: the nodes in the list can be changed, and the contents within the nodes in the list can be changed. For each of the following combinations, describe a situation in which you’d want that combination, and what that combination looks like in your code
+   * Modify which nodes are in the list, can’t modify contents of nodes
+We would need this when we would use functions similar to removeTier() or removeTicket() when we want to delete a node or perhaps return a NodeList with certain criteria. It would be a NodeList method since it is mutating the list rather than the Ticket objects themselves.
+   * Modify contents of nodes in the list, but can’t modify which nodes are in the list
+        This would be similar to a function such as setTier() that would exist as a method in the Ticket class and can only affect values within the ticket in which they are being called and cannot modify the list itself. 
+   * Can modify both the contents of nodes in the list and which nodes are in the list
+This resembles a method such as addFirst() which changes the length of a list and assigns the new Ticket which affects the content of the nodes in the list. 
+   * Cannot modify either the contents of nodes nor which nodes are in the list
+If we need to copy a NodeList, deep or shallow, both cannot modify the contents nor change the nodes in the list but rather either refer to the same object or create a new NodeList based on the NodeList being copied.
